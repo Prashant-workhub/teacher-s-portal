@@ -10,7 +10,7 @@ function NotFound() {
       <br />
       <br />
       <NavLink
-        className='justify-center flex bg-[#2563EB] h-8 p-1 px-2 m-1 text-[#FFFFFF] font-semibold'
+        className='justify-center flex bg-[#0F766E] h-8 p-1 px-2 m-1 text-[#FFFFFF] font-semibold'
         to={"/"}
       >
         Dashboard

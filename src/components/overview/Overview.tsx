@@ -9,11 +9,11 @@ import KpiCard from "../../Props/kpiCard";
 
 const Overview = () => {
   return (
-    <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+    <section className="grid items-stretch gap-5 md:grid-cols-2 xl:auto-rows-fr xl:grid-cols-3">
       <SubjectProgressBars data={Subjects} />
       <FacultyPendingDoubtsCard data={facultyPendingDoubts} />
       <SemesterStudentLoadCard data={semesterStudentLoad} />
-      <div className="xl:col-span-2">
+      <div className="h-full xl:col-span-2">
         <KpiCard data={subjectPerformanceKpi} />
       </div>
     </section>

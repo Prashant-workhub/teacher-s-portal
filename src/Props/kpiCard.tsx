@@ -11,8 +11,36 @@ const KpiCard = ({ data }: { data: KpiData }) => {
   const mutedText = "text-[#64748B]";
   const mainText = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
   const labelFill = isDark ? "#F8FAFC" : "#0F172A";
+  const brandText = isDark ? "text-[#16A34A]" : "text-[#0F766E]";
+  const targetStroke = isDark ? "#16A34A" : "#0F766E";
   const gridStroke = "#64748B";
   const gridOpacity = isDark ? 0.28 : 0.18;
+  const metricToneClass = (label: string, value: string, tone: string) => {
+    const numericValue = Number.parseFloat(value.replace(/[^0-9.-]/g, ""));
+
+    if (label === "Target Gap") {
+      if (numericValue < 0) return "text-[#DC2626]";
+      if (numericValue > 0) return "text-[#16A34A]";
+      return brandText;
+    }
+
+    if (label === "Pass Rate") {
+      if (numericValue >= 90) return "text-[#16A34A]";
+      if (numericValue >= 75) return brandText;
+      if (numericValue >= 60) return "text-[#D97706]";
+      return "text-[#DC2626]";
+    }
+
+    if (label === "Class Average") {
+      return numericValue >= data.target.value ? "text-[#16A34A]" : brandText;
+    }
+
+    if (tone === "success") return "text-[#16A34A]";
+    if (tone === "danger") return "text-[#DC2626]";
+    if (tone === "warning") return "text-[#D97706]";
+
+    return mainText;
+  };
 
   const chartWidth = Math.max(400, data.students.length * 80 + 100);
   const chartHeight = 220;
@@ -52,7 +80,7 @@ const KpiCard = ({ data }: { data: KpiData }) => {
         <a
           aria-label={`View all KPI details for ${data.subject.label}`}
           href={`/course-progress?subject=${data.subject.id}`}
-          className="font-medium text-[#2563EB] hover:underline"
+          className={`${brandText} font-medium hover:underline`}
         >
           View all
         </a>
@@ -92,7 +120,7 @@ const KpiCard = ({ data }: { data: KpiData }) => {
             x2={chartWidth - chartRight}
             y1={targetY}
             y2={targetY}
-            stroke="#16A34A"
+            stroke={targetStroke}
             strokeWidth="2"
           />
 
@@ -173,7 +201,7 @@ const KpiCard = ({ data }: { data: KpiData }) => {
             <p
               className={[
                 "mt-1 text-sm font-semibold",
-                metric.tone === "success" ? "text-[#16A34A]" : mainText,
+                metricToneClass(metric.label, metric.value, metric.tone),
               ].join(" ")}
             >
               {metric.value}

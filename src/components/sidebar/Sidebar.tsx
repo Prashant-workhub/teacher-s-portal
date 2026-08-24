@@ -46,6 +46,8 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
     : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
   const divider = "border-[#64748B]";
   const mutedText = "text-[#64748B]";
+  const brandBg = isDark ? "bg-[#16A34A]" : "bg-[#0F766E]";
+  const brandBorder = isDark ? "border-[#16A34A]" : "border-[#0F766E]";
 
   return (
     <aside
@@ -57,8 +59,8 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
     >
       <div className={`flex items-start justify-between gap-3 border-b px-4 py-4 ${divider}`}>
         <div className="flex min-w-0 items-center gap-3">
-          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#2563EB] text-[#FFFFFF]">
-            <div className="grid h-7 w-7 place-items-center rounded-lg bg-[#0F172A] text-[#FFFFFF]">
+          <div className={`${brandBg} grid h-10 w-10 shrink-0 place-items-center rounded-xl text-[#FFFFFF]`}>
+            <div className="grid h-7 w-7 place-items-center rounded-lg bg-[#FFFFFF] text-[#0F766E]">
               <BookText size={16} />
             </div>
           </div>
@@ -66,7 +68,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h1 className="text-base font-semibold tracking-[0.08em]">NOTEIT</h1>
-                <span className="rounded-md bg-[#2563EB] px-2 py-0.5 text-[10px] font-semibold text-[#FFFFFF]">
+                <span className={`${brandBg} rounded-md px-2 py-0.5 text-[10px] font-semibold text-[#FFFFFF]`}>
                   v2.0
                 </span>
               </div>
@@ -111,16 +113,16 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                       [
                         "group flex items-center gap-3 rounded-lg border px-3.5 py-3 transition-all",
                         isActive
-                          ? "border-[#2563EB] bg-[#2563EB] text-[#FFFFFF]"
+                          ? `${brandBorder} ${brandBg} text-[#FFFFFF]`
                           : isDark
                             ? "border-transparent bg-transparent text-[#F8FAFC] hover:border-[#64748B] hover:bg-[#0F172A]"
                             : "border-transparent bg-transparent text-[#0F172A] hover:border-[#64748B] hover:bg-[#F8FAFC]",
                       ].join(" ")
                     }
                     to={item.to}
-                  >
+                    >
                     <Icon
-                      className={isDark ? "text-[#F8FAFC]" : "text-[#0F172A]"}
+                      className={isDark ? "text-[#F8FAFC]" : "text-[#0F766E]"}
                       size={17}
                     />
                     {!collapsed ? <span className="text-sm font-medium">{item.label}</span> : null}
@@ -148,7 +150,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                       [
                         "group flex items-center gap-3 rounded-lg border px-3.5 py-3 transition-all",
                         isActive
-                          ? "border-[#2563EB] bg-[#2563EB] text-[#FFFFFF]"
+                          ? `${brandBorder} ${brandBg} text-[#FFFFFF]`
                           : isDark
                             ? "border-transparent bg-transparent text-[#F8FAFC] hover:border-[#64748B] hover:bg-[#0F172A]"
                             : "border-transparent bg-transparent text-[#0F172A] hover:border-[#64748B] hover:bg-[#F8FAFC]",
@@ -158,7 +160,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                   >
                     <span className="relative">
                       <Icon
-                        className={isDark ? "text-[#F8FAFC]" : "text-[#0F172A]"}
+                        className={isDark ? "text-[#F8FAFC]" : "text-[#0F766E]"}
                         size={17}
                       />
                       {item.label === "Activity Center" ? (
@@ -202,7 +204,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                 </div>
 
                 <button
-                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-[#64748B] bg-[#0F172A] px-4 py-2.5 text-sm font-medium text-[#FFFFFF] transition hover:opacity-95"
+                  className={`${brandBg} mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-[#64748B] px-4 py-2.5 text-sm font-medium text-[#FFFFFF] transition hover:opacity-95`}
                   type="button"
                 >
                   Unleash Pro Tiers <ArrowRightFromLine size={16} />
@@ -215,7 +217,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
 
       <div className={`mt-auto border-t p-4 ${divider}`}>
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-xl bg-[#2563EB] text-sm font-semibold text-[#FFFFFF]">
+          <div className={`${brandBg} grid h-10 w-10 place-items-center rounded-xl text-sm font-semibold text-[#FFFFFF]`}>
             A
           </div>
           {!collapsed ? (

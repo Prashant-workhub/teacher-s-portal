@@ -10,6 +10,8 @@ const SemesterStudentLoadCard = ({ data }: { data: SemesterStudentLoadData }) =>
     : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
   const mutedText = "text-[#64748B]";
   const mainText = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
+  const brandText = isDark ? "text-[#16A34A]" : "text-[#0F766E]";
+  const brandSecondaryText = isDark ? "text-[#0F766E]" : "text-[#16A34A]";
   const trackClass = isDark ? "bg-[#64748B]/20" : "bg-[#64748B]/12";
   const footerShell = isDark
     ? "border-[#64748B]/35 bg-[#0F172A]"
@@ -43,7 +45,7 @@ const SemesterStudentLoadCard = ({ data }: { data: SemesterStudentLoadData }) =>
 
         <a
           aria-label={`View all load details for ${data.subject.label}`}
-          className="shrink-0 font-medium text-[#2563EB] hover:underline"
+          className={`shrink-0 font-medium ${brandText} hover:underline`}
           href={`/course-progress?subject=${data.subject.id}`}
         >
           View all
@@ -90,13 +92,13 @@ const SemesterStudentLoadCard = ({ data }: { data: SemesterStudentLoadData }) =>
         </div>
         <div className="min-w-0 text-center">
           <p className={`text-[11px] leading-4 ${mutedText}`}>Average / sem</p>
-          <p className="mt-1 text-sm font-semibold text-[#2563EB]">
+          <p className={`mt-1 text-sm font-semibold ${brandText}`}>
             {averageStudents}
           </p>
         </div>
         <div className="min-w-0 text-center">
           <p className={`text-[11px] leading-4 ${mutedText}`}>Peak sem</p>
-          <p className="mt-1 text-sm font-semibold text-[#16A34A]">
+          <p className={`mt-1 text-sm font-semibold ${brandSecondaryText}`}>
             {peakSemester.label}
           </p>
         </div>

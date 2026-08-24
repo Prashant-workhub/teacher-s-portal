@@ -12,7 +12,7 @@ export type KpiStudent = {
 export type KpiMetric = {
   label: string;
   value: string;
-  tone: "neutral" | "success";
+  tone: "neutral" | "success" | "danger" | "warning";
 };
 
 export type KpiData = {

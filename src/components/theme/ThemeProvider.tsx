@@ -38,9 +38,12 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
     root.style.colorScheme = theme;
     root.style.setProperty("--app-bg", theme === "dark" ? "#0F172A" : "#F8FAFC");
     root.style.setProperty("--app-surface", theme === "dark" ? "#0F172A" : "#FFFFFF");
-    root.style.setProperty("--app-border", theme === "dark" ? "#64748B" : "#64748B");
-    root.style.setProperty("--app-text", "#0F172A");
+    root.style.setProperty("--app-surface-alt", theme === "dark" ? "#0F172A" : "#F8FAFC");
+    root.style.setProperty("--app-border", "#64748B");
+    root.style.setProperty("--app-text", theme === "dark" ? "#F8FAFC" : "#0F172A");
     root.style.setProperty("--app-muted", "#64748B");
+    root.style.setProperty("--app-brand", theme === "dark" ? "#16A34A" : "#0F766E");
+    root.style.setProperty("--app-brand-strong", theme === "dark" ? "#0F766E" : "#16A34A");
     window.localStorage.setItem(storageKey, theme);
   }, [theme]);
 

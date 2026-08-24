@@ -20,6 +20,8 @@ const Header = () => {
   const { theme, toggleTheme } = useTheme();
   const currentTitle = routeTitles[pathname] ?? "Overview";
   const isDark = theme === "dark";
+  const brandBg = isDark ? "bg-[#16A34A]" : "bg-[#0F766E]";
+  const brandText = isDark ? "text-[#16A34A]" : "text-[#0F766E]";
   const shellBg = isDark ? "bg-[#0F172A]" : "bg-[#FFFFFF]";
   const shellBorder = "border-[#64748B]";
   const textMain = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
@@ -38,11 +40,11 @@ const Header = () => {
     >
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
-          <div className="rounded-md bg-[#2563EB] px-3 py-2 text-xs font-semibold tracking-[0.12em] text-[#FFFFFF]">
+          <div className={`${brandBg} rounded-md px-3 py-2 text-xs font-semibold tracking-[0.12em] text-[#FFFFFF]`}>
             NOTEIT
           </div>
           <ChevronRight className={textMuted} size={16} />
-          <div className="rounded-md bg-[#2563EB] px-3 py-2 text-sm font-medium text-[#FFFFFF]">
+          <div className={`${brandBg} rounded-md px-3 py-2 text-sm font-medium text-[#FFFFFF]`}>
             {currentTitle}
           </div>
         </div>
@@ -82,7 +84,7 @@ const Header = () => {
               "grid h-10 w-10 place-items-center rounded-xl border transition hover:scale-[1.02]",
               shellBorder,
               panelBg,
-              "text-[#2563EB]",
+              brandText,
             ].join(" ")}
             onClick={toggleTheme}
             type="button"
@@ -104,8 +106,8 @@ const Header = () => {
             <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-[#DC2626]" />
           </button>
 
-          <div className="h-10 w-10 rounded-xl bg-[#2563EB] p-0.5">
-            <div className="grid h-full w-full place-items-center rounded-[10px] bg-[#0F172A] text-sm font-semibold text-[#FFFFFF]">
+          <div className={`${brandBg} h-10 w-10 rounded-xl p-0.5`}>
+            <div className="grid h-full w-full place-items-center rounded-[10px] bg-[#FFFFFF] text-sm font-semibold text-[#0F766E]">
               A
             </div>
           </div>

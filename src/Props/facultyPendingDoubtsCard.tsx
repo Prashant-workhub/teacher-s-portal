@@ -10,6 +10,7 @@ const FacultyPendingDoubtsCard = ({ data }: { data: FacultyPendingDoubtsData }) 
     ? "border-[#64748B] bg-[#0F172A] text-[#F8FAFC]"
     : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
   const mutedText = "text-[#64748B]";
+  const brandText = isDark ? "text-[#16A34A]" : "text-[#0F766E]";
   const insetShell = isDark
     ? "border-[#64748B]/40 bg-[#0F172A]"
     : "border-[#64748B]/40 bg-[#F8FAFC]";
@@ -117,10 +118,10 @@ const FacultyPendingDoubtsCard = ({ data }: { data: FacultyPendingDoubtsData }) 
 
           <div className={`rounded-xl border p-3 ${insetShell}`}>
             <div className="flex items-center gap-2 text-xs font-medium text-[#64748B]">
-              <Clock className="h-4 w-4 text-[#2563EB]" />
+              <Clock className={`h-4 w-4 ${brandText}`} />
               Max Response Time
             </div>
-            <p className="mt-2 text-lg font-semibold text-[#2563EB]">
+            <p className={`mt-2 text-lg font-semibold ${brandText}`}>
               {data.queue.responseTargetHours}h
             </p>
           </div>

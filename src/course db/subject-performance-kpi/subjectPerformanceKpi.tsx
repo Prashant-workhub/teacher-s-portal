@@ -3,9 +3,9 @@ import type { KpiData } from "../../types/kpi";
 const students = [
   { grade: "F", value: 43, color: "#DC2626" },
   { grade: "D", value: 65, color: "#D97706" },
-  { grade: "C", value: 78, color: "#2563EB" },
-  { grade: "B", value: 94, color: "#2563EB" },
-  { grade: "A", value: 56, color: "#16A34A" },
+  { grade: "C", value: 78, color: "#0F766E" },
+  { grade: "B", value: 94, color: "#16A34A" },
+  { grade: "A", value: 56, color: "#0F766E" },
 ];
 
 const TARGET_AVERAGE = 75; 
@@ -28,8 +28,12 @@ const subjectPerformanceKpi: KpiData = {
   students,
   metrics: [
     { label: "Class Average", value: `${classAvgNum}`, tone: "neutral" },
-    { label: "Pass Rate", value: `${passRateNum}%`, tone: "neutral" },
-    { label: "Target Gap", value: `${targetGapNum >= 0 ? '+' : ''}${targetGapNum}`, tone: "success" },
+    { label: "Pass Rate", value: `${passRateNum}%`, tone: "success" },
+    {
+      label: "Target Gap",
+      value: `${targetGapNum >= 0 ? "+" : ""}${targetGapNum}`,
+      tone: targetGapNum < 0 ? "danger" : "success",
+    },
   ],
   target: {
     value: TARGET_AVERAGE,
