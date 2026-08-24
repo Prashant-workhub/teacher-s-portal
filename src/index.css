@@ -10,8 +10,10 @@ body {
   margin: 0;
   min-width: 320px;
   transition: background-color 180ms ease, color 180ms ease;
-  background: var(--app-bg, #F8FAFC);
-  color: var(--app-text, #0F172A);
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--app-brand, #059669) 12%, transparent), transparent 42%),
+    var(--app-bg, #F3F6F4);
+  color: var(--app-text, #111827);
 }
 
 * {
@@ -19,11 +21,15 @@ body {
 }
 
 [data-theme="dark"] body {
-  background: #0F172A;
-  color: #F8FAFC;
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--app-brand, #34D399) 18%, transparent), transparent 40%),
+    var(--app-bg, #0F141B);
+  color: var(--app-text, #EAF2EC);
 }
 
 [data-theme="light"] body {
-  background: #F8FAFC;
-  color: #0F172A;
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--app-brand, #059669) 12%, transparent), transparent 42%),
+    var(--app-bg, #F3F6F4);
+  color: var(--app-text, #111827);
 }

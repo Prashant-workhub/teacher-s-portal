@@ -1,19 +1,11 @@
 import { AlertCircle, CheckCircle2, Clock, Inbox } from "lucide-react";
-import { useTheme } from "../components/theme/ThemeProvider";
 import type { FacultyPendingDoubtsData } from "../types/kpi";
 
 const FacultyPendingDoubtsCard = ({ data }: { data: FacultyPendingDoubtsData }) => {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
-  const shellClass = isDark
-    ? "border-[#64748B] bg-[#0F172A] text-[#F8FAFC]"
-    : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
-  const mutedText = "text-[#64748B]";
-  const brandText = isDark ? "text-[#16A34A]" : "text-[#0F766E]";
-  const insetShell = isDark
-    ? "border-[#64748B]/40 bg-[#0F172A]"
-    : "border-[#64748B]/40 bg-[#F8FAFC]";
+  const shellClass = "border-[var(--app-border)] bg-[var(--app-surface)] text-[var(--app-text)]";
+  const mutedText = "text-[var(--app-muted)]";
+  const brandText = "text-[var(--app-brand)]";
+  const insetShell = "border-[var(--app-border)]/40 bg-[var(--app-surface-alt)]";
   const overdueCount = data.queue.overdueQuestionsCount;
   const openCount = data.queue.openQuestionsCount;
   const statusTone = overdueCount > 0 ? "danger" : "success";
@@ -23,7 +15,7 @@ const FacultyPendingDoubtsCard = ({ data }: { data: FacultyPendingDoubtsData }) 
   const statusClass =
     statusTone === "danger"
       ? "bg-[#DC2626]/10 text-[#DC2626] border-[#DC2626]/30"
-      : "bg-[#16A34A]/10 text-[#16A34A] border-[#16A34A]/30";
+      : "bg-[var(--app-brand)]/10 text-[var(--app-brand)] border-[var(--app-brand)]/30";
 
   return (
     <div className={`h-full w-full min-w-0 rounded-2xl border p-5 ${shellClass}`}>
@@ -35,7 +27,7 @@ const FacultyPendingDoubtsCard = ({ data }: { data: FacultyPendingDoubtsData }) 
                 "rounded-xl border p-2",
                 overdueCount > 0
                   ? "border-[#DC2626]/30 bg-[#DC2626]/10 text-[#DC2626]"
-                  : "border-[#16A34A]/30 bg-[#16A34A]/10 text-[#16A34A]",
+                  : "border-[var(--app-brand)]/30 bg-[var(--app-brand)]/10 text-[var(--app-brand)]",
               ].join(" ")}
             >
               <Inbox className="h-5 w-5" />
@@ -80,7 +72,7 @@ const FacultyPendingDoubtsCard = ({ data }: { data: FacultyPendingDoubtsData }) 
 
           <div
             aria-label={`${overdueCount} overdue out of ${openCount} open questions`}
-            className="mt-2 h-2 w-full rounded-full bg-[#64748B]/25"
+            className="mt-2 h-2 w-full rounded-full bg-[var(--app-surface-alt)]"
             role="progressbar"
             aria-valuemin={0}
             aria-valuemax={openCount}
@@ -94,30 +86,30 @@ const FacultyPendingDoubtsCard = ({ data }: { data: FacultyPendingDoubtsData }) 
           </div>
         </div>
 
-        <div className="mt-4 flex items-center gap-1.5 border-t border-[#64748B] pt-3 text-xs">
+        <div className="mt-4 flex items-center gap-1.5 border-t border-[var(--app-border)] pt-3 text-xs">
           <AlertCircle className={`h-4 w-4 ${mutedText}`} />
           <span className={mutedText}>
             You answered{" "}
-            <strong className={isDark ? "text-[#F8FAFC]" : "text-[#0F172A]"}>
+            <strong className="text-[var(--app-text)]">
               {data.queue.solvedThisWeekCount} doubts
             </strong>{" "}
             over the last 7 days.
           </span>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-[#64748B] pt-4">
+        <div className="mt-4 grid grid-cols-2 gap-3 border-t border-[var(--app-border)] pt-4">
           <div className={`rounded-xl border p-3 ${insetShell}`}>
-            <div className="flex items-center gap-2 text-xs font-medium text-[#64748B]">
-              <CheckCircle2 className="h-4 w-4 text-[#16A34A]" />
+            <div className="flex items-center gap-2 text-xs font-medium text-[var(--app-muted)]">
+              <CheckCircle2 className="h-4 w-4 text-[var(--app-brand)]" />
               Resolved
             </div>
-            <p className="mt-2 text-lg font-semibold text-[#16A34A]">
+            <p className="mt-2 text-lg font-semibold text-[var(--app-brand)]">
               {data.queue.solvedThisWeekCount}
             </p>
           </div>
 
           <div className={`rounded-xl border p-3 ${insetShell}`}>
-            <div className="flex items-center gap-2 text-xs font-medium text-[#64748B]">
+            <div className="flex items-center gap-2 text-xs font-medium text-[var(--app-muted)]">
               <Clock className={`h-4 w-4 ${brandText}`} />
               Max Response Time
             </div>

@@ -1,22 +1,14 @@
-import { useTheme } from "../components/theme/ThemeProvider";
 import type { SemesterStudentLoadData } from "../types/kpi";
 
 const SemesterStudentLoadCard = ({ data }: { data: SemesterStudentLoadData }) => {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-
-  const shellClass = isDark
-    ? "border-[#64748B] bg-[#0F172A] text-[#F8FAFC]"
-    : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
-  const mutedText = "text-[#64748B]";
-  const mainText = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
-  const brandText = isDark ? "text-[#16A34A]" : "text-[#0F766E]";
-  const brandSecondaryText = isDark ? "text-[#0F766E]" : "text-[#16A34A]";
-  const trackClass = isDark ? "bg-[#64748B]/20" : "bg-[#64748B]/12";
-  const footerShell = isDark
-    ? "border-[#64748B]/35 bg-[#0F172A]"
-    : "border-[#64748B]/35 bg-[#F8FAFC]";
-  const titleText = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
+  const shellClass = "border-[var(--app-border)] bg-[var(--app-surface)] text-[var(--app-text)]";
+  const mutedText = "text-[var(--app-muted)]";
+  const mainText = "text-[var(--app-text)]";
+  const brandText = "text-[var(--app-brand)]";
+  const brandSecondaryText = "text-[var(--app-brand-strong)]";
+  const trackClass = "bg-[var(--app-surface-alt)]";
+  const footerShell = "border-[var(--app-border)]/35 bg-[var(--app-surface-alt)]";
+  const titleText = "text-[var(--app-text)]";
 
   const totalStudents = data.semesters.reduce(
     (sum, semester) => sum + semester.studentCount,

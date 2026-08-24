@@ -1,32 +1,15 @@
-import { Bell, ChevronRight, MoonStar, Search, SunMedium } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { Bell, MoonStar, Search, SunMedium } from "lucide-react";
 import { useTheme } from "../theme/ThemeProvider";
 
-const routeTitles: Record<string, string> = {
-  "/": "Overview",
-  "/overview": "Overview",
-  "/my-courses": "My Courses",
-  "/course-progress": "Course Progress",
-  "/student-doubts": "Student Doubts",
-  "/quiz-performance": "Quiz & Performance",
-  "/learning-analytics": "Learning Analytics",
-  "/lecture-insights": "Lecture Insights",
-  "/announcements-resources": "Announcements / Resources",
-  "/profile-settings": "Profile & Settings",
-};
-
 const Header = () => {
-  const { pathname } = useLocation();
   const { theme, toggleTheme } = useTheme();
-  const currentTitle = routeTitles[pathname] ?? "Overview";
-  const isDark = theme === "dark";
-  const brandBg = isDark ? "bg-[#16A34A]" : "bg-[#0F766E]";
-  const brandText = isDark ? "text-[#16A34A]" : "text-[#0F766E]";
-  const shellBg = isDark ? "bg-[#0F172A]" : "bg-[#FFFFFF]";
-  const shellBorder = "border-[#64748B]";
-  const textMain = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
-  const textMuted = "text-[#64748B]";
-  const panelBg = isDark ? "bg-[#0F172A]" : "bg-[#F8FAFC]";
+  const brandBg = "bg-[var(--app-brand)]";
+  const brandText = "text-[var(--app-brand)]";
+  const shellBg = "bg-[var(--app-surface)]";
+  const shellBorder = "border-[var(--app-border)]";
+  const textMain = "text-[var(--app-text)]";
+  const textMuted = "text-[var(--app-muted)]";
+  const panelBg = "bg-[var(--app-surface-alt)]";
 
   return (
     <header
@@ -36,16 +19,14 @@ const Header = () => {
         shellBg,
         textMain,
       ].join(" ")}
-      style={{ backgroundColor: isDark ? "#0F172A" : "#FFFFFF" }}
+      style={{
+        backgroundColor: "var(--app-surface)",
+      }}
     >
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-2">
-          <div className={`${brandBg} rounded-md px-3 py-2 text-xs font-semibold tracking-[0.12em] text-[#FFFFFF]`}>
-            NOTEIT
-          </div>
-          <ChevronRight className={textMuted} size={16} />
-          <div className={`${brandBg} rounded-md px-3 py-2 text-sm font-medium text-[#FFFFFF]`}>
-            {currentTitle}
+          <div className={`rounded-md px-3 py-2 text-3xl font-semibold tracking-[0.12em] text-white`}>
+            NOTEIT 
           </div>
         </div>
 
@@ -107,7 +88,7 @@ const Header = () => {
           </button>
 
           <div className={`${brandBg} h-10 w-10 rounded-xl p-0.5`}>
-            <div className="grid h-full w-full place-items-center rounded-[10px] bg-[#FFFFFF] text-sm font-semibold text-[#0F766E]">
+            <div className="grid h-full w-full place-items-center rounded-[10px] bg-white text-sm font-semibold text-[var(--app-brand-strong)]">
               A
             </div>
           </div>

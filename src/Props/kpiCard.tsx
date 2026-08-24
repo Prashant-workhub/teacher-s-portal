@@ -1,41 +1,45 @@
 import { useTheme } from "../components/theme/ThemeProvider";
-import type { KpiData } from "../types/kpi";
+import type { KpiData, KpiSubject } from "../types/kpi";
 
-const KpiCard = ({ data }: { data: KpiData }) => {
+type KpiCardProps = {
+  data: KpiData;
+  subjectOptions: KpiSubject[];
+  onSubjectChange: (subjectId: string) => void;
+};
+
+const KpiCard = ({ data, subjectOptions, onSubjectChange }: KpiCardProps) => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
-  const shellClass = isDark
-    ? "border-[#64748B] bg-[#0F172A] text-[#F8FAFC]"
-    : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
-  const mutedText = "text-[#64748B]";
-  const mainText = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
-  const labelFill = isDark ? "#F8FAFC" : "#0F172A";
-  const brandText = isDark ? "text-[#16A34A]" : "text-[#0F766E]";
-  const targetStroke = isDark ? "#16A34A" : "#0F766E";
-  const gridStroke = "#64748B";
+  const shellClass = "border-[var(--app-border)] bg-[var(--app-surface)] text-[var(--app-text)]";
+  const mutedText = "text-[var(--app-muted)]";
+  const mainText = "text-[var(--app-text)]";
+  const labelFill = "var(--app-text)";
+  const brandText = "text-[var(--app-brand)]";
+  const targetStroke = "var(--app-brand-strong)";
+  const gridStroke = "var(--app-border)";
   const gridOpacity = isDark ? 0.28 : 0.18;
   const metricToneClass = (label: string, value: string, tone: string) => {
     const numericValue = Number.parseFloat(value.replace(/[^0-9.-]/g, ""));
 
     if (label === "Target Gap") {
       if (numericValue < 0) return "text-[#DC2626]";
-      if (numericValue > 0) return "text-[#16A34A]";
+      if (numericValue > 0) return "text-[var(--app-brand)]";
       return brandText;
     }
 
     if (label === "Pass Rate") {
-      if (numericValue >= 90) return "text-[#16A34A]";
+      if (numericValue >= 90) return "text-[var(--app-brand)]";
       if (numericValue >= 75) return brandText;
       if (numericValue >= 60) return "text-[#D97706]";
       return "text-[#DC2626]";
     }
 
     if (label === "Class Average") {
-      return numericValue >= data.target.value ? "text-[#16A34A]" : brandText;
+      return numericValue >= data.target.value ? "text-[var(--app-brand)]" : brandText;
     }
 
-    if (tone === "success") return "text-[#16A34A]";
+    if (tone === "success") return "text-[var(--app-brand)]";
     if (tone === "danger") return "text-[#DC2626]";
     if (tone === "warning") return "text-[#D97706]";
 
@@ -73,17 +77,44 @@ const KpiCard = ({ data }: { data: KpiData }) => {
 
   return (
     <div className={`h-full min-h-[26rem] w-full min-w-0 overflow-hidden rounded-2xl border p-4 ${shellClass}`}>
-      <div className="mb-3 flex h-9 items-center justify-between gap-3">
-        <h5 className="min-w-0 truncate text-base font-semibold leading-none">
-          {data.subject.label}
-        </h5>
-        <a
-          aria-label={`View all KPI details for ${data.subject.label}`}
-          href={`/course-progress?subject=${data.subject.id}`}
-          className={`${brandText} font-medium hover:underline`}
-        >
-          View all
-        </a>
+      <div className="mb-3 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div className="min-w-0">
+          <p className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${mutedText}`}>
+            Performance Tracking
+          </p>
+          <h5 className="mt-1 min-w-0 truncate text-base font-semibold leading-none">
+            {data.subject.label}
+          </h5>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-2">
+          <label className="relative">
+            <span className="sr-only">Select KPI subject</span>
+            <select
+              aria-label="Select KPI subject"
+              className={[
+                "min-w-[12rem] rounded-xl border px-3 py-2 pr-9 text-sm font-medium outline-none transition",
+                "appearance-none border-[var(--app-border)] bg-[var(--app-surface-alt)] text-[var(--app-text)]",
+              ].join(" ")}
+              onChange={(event) => onSubjectChange(event.target.value)}
+              value={data.subject.id}
+            >
+              {subjectOptions.map((subject) => (
+                <option key={subject.id} value={subject.id}>
+                  {subject.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <a
+            aria-label={`View all KPI details for ${data.subject.label}`}
+            href={`/course-progress?subject=${data.subject.id}`}
+            className={`${brandText} font-medium hover:underline`}
+          >
+            View all
+          </a>
+        </div>
       </div>
 
       <p className="sr-only">
@@ -187,14 +218,23 @@ const KpiCard = ({ data }: { data: KpiData }) => {
             );
           })}
 
-          <rect x={badgeX} y={badgeY} rx="4" ry="4" width={badgeWidth} height="24" fill="#DC2626" />
+          <rect x={badgeX} y={badgeY} rx="4" ry="4" width={badgeWidth} height="24" fill="var(--app-brand-strong)" />
           <text x={badgeX + badgeWidth / 2} y={badgeY + 16} fill="#FFFFFF" fontSize="12" fontWeight="700" textAnchor="middle">
             {data.target.value}
           </text>
         </svg>
       </div>
 
-      <div className="mt-1 grid grid-cols-3 gap-2 border-t border-[#64748B] pt-3">
+      <div className="mt-3 rounded-2xl border border-[var(--app-border)]/45 bg-[var(--app-surface-alt)]/65 p-3">
+        <p className={`text-[11px] font-semibold uppercase tracking-[0.2em] ${mutedText}`}>
+          Performance KPI
+        </p>
+        <h6 className="mt-1 text-sm font-semibold text-[var(--app-text)]">
+          Class average, pass rate, and target gap
+        </h6>
+      </div>
+
+      <div className="mt-1 grid grid-cols-3 gap-2 border-t border-[var(--app-border)] pt-3">
         {data.metrics.map((metric) => (
           <div key={metric.label} className="min-w-0 text-center">
             <p className={`text-[11px] leading-4 ${mutedText}`}>{metric.label}</p>

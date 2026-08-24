@@ -41,13 +41,16 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
-  const shellClasses = isDark
-    ? "border-[#64748B] bg-[#0F172A] text-[#F8FAFC]"
-    : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
-  const divider = "border-[#64748B]";
-  const mutedText = "text-[#64748B]";
-  const brandBg = isDark ? "bg-[#16A34A]" : "bg-[#0F766E]";
-  const brandBorder = isDark ? "border-[#16A34A]" : "border-[#0F766E]";
+  const shellClasses = "border-[var(--app-border)] bg-[var(--app-surface)] text-[var(--app-text)]";
+  const divider = "border-[var(--app-border)]";
+  const mutedText = "text-[var(--app-muted)]";
+  const brandBg = "bg-[var(--app-brand)]";
+  const brandBorder = "border-[var(--app-brand)]";
+  const brandText = "text-[var(--app-brand)]";
+  const activeText = "text-white";
+  const inactiveClasses = isDark
+    ? "border-transparent bg-transparent text-[var(--app-text)] hover:border-[var(--app-border)] hover:bg-[var(--app-surface-alt)]"
+    : "border-transparent bg-transparent text-[var(--app-text)] hover:border-[var(--app-border)] hover:bg-[var(--app-surface-alt)]";
 
   return (
     <aside
@@ -59,8 +62,8 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
     >
       <div className={`flex items-start justify-between gap-3 border-b px-4 py-4 ${divider}`}>
         <div className="flex min-w-0 items-center gap-3">
-          <div className={`${brandBg} grid h-10 w-10 shrink-0 place-items-center rounded-xl text-[#FFFFFF]`}>
-            <div className="grid h-7 w-7 place-items-center rounded-lg bg-[#FFFFFF] text-[#0F766E]">
+          <div className={`${brandBg} grid h-10 w-10 shrink-0 place-items-center rounded-xl text-white`}>
+            <div className="grid h-7 w-7 place-items-center rounded-lg bg-white text-[var(--app-brand-strong)]">
               <BookText size={16} />
             </div>
           </div>
@@ -68,7 +71,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
             <div className="min-w-0">
               <div className="flex items-center gap-2">
                 <h1 className="text-base font-semibold tracking-[0.08em]">NOTEIT</h1>
-                <span className={`${brandBg} rounded-md px-2 py-0.5 text-[10px] font-semibold text-[#FFFFFF]`}>
+                <span className={`${brandBg} rounded-md px-2 py-0.5 text-[10px] font-semibold text-white`}>
                   v2.0
                 </span>
               </div>
@@ -84,7 +87,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
           className={[
             "grid h-9 w-9 place-items-center rounded-lg border transition hover:scale-[1.02]",
             divider,
-            isDark ? "bg-[#0F172A] text-[#F8FAFC]" : "bg-[#FFFFFF] text-[#0F172A]",
+            "bg-[var(--app-surface-alt)] text-[var(--app-text)]",
           ].join(" ")}
           onClick={onToggleCollapse}
           type="button"
@@ -113,19 +116,18 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                       [
                         "group flex items-center gap-3 rounded-lg border px-3.5 py-3 transition-all",
                         isActive
-                          ? `${brandBorder} ${brandBg} text-[#FFFFFF]`
-                          : isDark
-                            ? "border-transparent bg-transparent text-[#F8FAFC] hover:border-[#64748B] hover:bg-[#0F172A]"
-                            : "border-transparent bg-transparent text-[#0F172A] hover:border-[#64748B] hover:bg-[#F8FAFC]",
+                          ? `${brandBorder} ${brandBg} ${activeText}`
+                          : inactiveClasses,
                       ].join(" ")
                     }
                     to={item.to}
-                    >
-                    <Icon
-                      className={isDark ? "text-[#F8FAFC]" : "text-[#0F766E]"}
-                      size={17}
-                    />
-                    {!collapsed ? <span className="text-sm font-medium">{item.label}</span> : null}
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <Icon className={isActive ? "text-white" : brandText} size={17} />
+                        {!collapsed ? <span className="text-sm font-medium">{item.label}</span> : null}
+                      </>
+                    )}
                   </NavLink>
                 );
               })}
@@ -150,33 +152,32 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                       [
                         "group flex items-center gap-3 rounded-lg border px-3.5 py-3 transition-all",
                         isActive
-                          ? `${brandBorder} ${brandBg} text-[#FFFFFF]`
-                          : isDark
-                            ? "border-transparent bg-transparent text-[#F8FAFC] hover:border-[#64748B] hover:bg-[#0F172A]"
-                            : "border-transparent bg-transparent text-[#0F172A] hover:border-[#64748B] hover:bg-[#F8FAFC]",
+                          ? `${brandBorder} ${brandBg} ${activeText}`
+                          : inactiveClasses,
                       ].join(" ")
                     }
                     to={item.to}
                   >
-                    <span className="relative">
-                      <Icon
-                        className={isDark ? "text-[#F8FAFC]" : "text-[#0F766E]"}
-                        size={17}
-                      />
-                      {item.label === "Activity Center" ? (
-                        <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#D97706]" />
-                      ) : null}
-                    </span>
-                    {!collapsed ? (
-                      <span className="flex min-w-0 items-center gap-2">
-                        <span className="text-sm font-medium">{item.label}</span>
-                        {item.badge ? (
-                          <span className="rounded-md border border-[#64748B] px-2 py-0.5 text-[10px] font-medium text-inherit">
-                            {item.badge}
+                    {({ isActive }) => (
+                      <>
+                        <span className="relative">
+                          <Icon className={isActive ? "text-white" : brandText} size={17} />
+                          {item.label === "Activity Center" ? (
+                            <span className="absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full bg-[#D97706]" />
+                          ) : null}
+                        </span>
+                        {!collapsed ? (
+                          <span className="flex min-w-0 items-center gap-2">
+                            <span className="text-sm font-medium">{item.label}</span>
+                            {item.badge ? (
+                              <span className="rounded-md border border-[var(--app-border)] px-2 py-0.5 text-[10px] font-medium text-inherit">
+                                {item.badge}
+                              </span>
+                            ) : null}
                           </span>
                         ) : null}
-                      </span>
-                    ) : null}
+                      </>
+                    )}
                   </NavLink>
                 );
               })}
@@ -188,7 +189,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
               <div
                 className={[
                   "rounded-2xl border p-3.5",
-                  isDark ? "border-[#64748B] bg-[#0F172A]" : "border-[#64748B] bg-[#F8FAFC]",
+                  "border-[var(--app-border)] bg-[var(--app-surface-alt)]",
                 ].join(" ")}
               >
                 <div className="flex items-start justify-between gap-3">
@@ -204,7 +205,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                 </div>
 
                 <button
-                  className={`${brandBg} mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-[#64748B] px-4 py-2.5 text-sm font-medium text-[#FFFFFF] transition hover:opacity-95`}
+                  className={`${brandBg} mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--app-border)] px-4 py-2.5 text-sm font-medium text-white transition hover:opacity-95`}
                   type="button"
                 >
                   Unleash Pro Tiers <ArrowRightFromLine size={16} />
@@ -217,7 +218,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
 
       <div className={`mt-auto border-t p-4 ${divider}`}>
         <div className="flex items-center gap-3">
-          <div className={`${brandBg} grid h-10 w-10 place-items-center rounded-xl text-sm font-semibold text-[#FFFFFF]`}>
+          <div className={`${brandBg} grid h-10 w-10 place-items-center rounded-xl text-sm font-semibold text-white`}>
             A
           </div>
           {!collapsed ? (
@@ -231,7 +232,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
             className={[
               "ml-auto grid h-9 w-9 place-items-center rounded-lg border transition hover:scale-[1.02]",
               divider,
-              isDark ? "bg-[#0F172A] text-[#F8FAFC]" : "bg-[#FFFFFF] text-[#0F172A]",
+              "bg-[var(--app-surface-alt)] text-[var(--app-text)]",
             ].join(" ")}
             type="button"
           >

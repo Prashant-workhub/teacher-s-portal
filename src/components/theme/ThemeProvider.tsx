@@ -10,6 +10,28 @@ type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 const storageKey = "noteit-theme";
+const themePalette = {
+  dark: {
+    bg: "#0F141B",
+    surface: "#151C25",
+    surfaceAlt: "#1B2430",
+    border: "#2E3A46",
+    text: "#EAF2EC",
+    muted: "#93A4AF",
+    brand: "#34D399",
+    brandStrong: "#059669",
+  },
+  light: {
+    bg: "#F3F6F4",
+    surface: "#FFFFFF",
+    surfaceAlt: "#E8EEEA",
+    border: "#CBD5D0",
+    text: "#111827",
+    muted: "#66707B",
+    brand: "#059669",
+    brandStrong: "#047857",
+  },
+} as const;
 
 const getInitialTheme = (): Theme => {
   if (typeof window === "undefined") {
@@ -34,16 +56,18 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
 
   useEffect(() => {
     const root = document.documentElement;
+    const palette = themePalette[theme];
+
     root.dataset.theme = theme;
     root.style.colorScheme = theme;
-    root.style.setProperty("--app-bg", theme === "dark" ? "#0F172A" : "#F8FAFC");
-    root.style.setProperty("--app-surface", theme === "dark" ? "#0F172A" : "#FFFFFF");
-    root.style.setProperty("--app-surface-alt", theme === "dark" ? "#0F172A" : "#F8FAFC");
-    root.style.setProperty("--app-border", "#64748B");
-    root.style.setProperty("--app-text", theme === "dark" ? "#F8FAFC" : "#0F172A");
-    root.style.setProperty("--app-muted", "#64748B");
-    root.style.setProperty("--app-brand", theme === "dark" ? "#16A34A" : "#0F766E");
-    root.style.setProperty("--app-brand-strong", theme === "dark" ? "#0F766E" : "#16A34A");
+    root.style.setProperty("--app-bg", palette.bg);
+    root.style.setProperty("--app-surface", palette.surface);
+    root.style.setProperty("--app-surface-alt", palette.surfaceAlt);
+    root.style.setProperty("--app-border", palette.border);
+    root.style.setProperty("--app-text", palette.text);
+    root.style.setProperty("--app-muted", palette.muted);
+    root.style.setProperty("--app-brand", palette.brand);
+    root.style.setProperty("--app-brand-strong", palette.brandStrong);
     window.localStorage.setItem(storageKey, theme);
   }, [theme]);
 

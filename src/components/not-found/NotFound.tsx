@@ -2,15 +2,15 @@ import { NavLink } from "react-router-dom";
 
 function NotFound() {
   return (
-    <div className='h-screen gap-4'>
-      <h1 className='mt-10 p-4 justify-center flex'>404 Not Found</h1>
-      <p className='justify-center p-4 flex'>
+    <div className="h-screen gap-4 bg-[var(--app-bg)] text-[var(--app-text)]">
+      <h1 className="mt-10 flex justify-center p-4">404 Not Found</h1>
+      <p className="flex justify-center p-4">
         Please navigate to authorised links
       </p>
       <br />
       <br />
       <NavLink
-        className='justify-center flex bg-[#0F766E] h-8 p-1 px-2 m-1 text-[#FFFFFF] font-semibold'
+        className="m-1 flex h-8 justify-center bg-[var(--app-brand)] px-2 p-1 font-semibold text-white"
         to={"/"}
       >
         Dashboard

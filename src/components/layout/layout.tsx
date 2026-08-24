@@ -13,7 +13,9 @@ const Layout = () => {
     <div
       className={[
         "min-h-screen transition-colors",
-        isDark ? "bg-[#0F172A] text-[#F8FAFC]" : "bg-[#F8FAFC] text-[#0F172A]",
+        isDark
+          ? "bg-[var(--app-bg)] text-[var(--app-text)]"
+          : "bg-[var(--app-bg)] text-[var(--app-text)]",
       ].join(" ")}
     >
       <Header />
@@ -29,8 +31,8 @@ const Layout = () => {
             className={[
               "min-h-[calc(100vh-105px)] rounded-2xl border p-4 transition-colors md:p-5",
               isDark
-                ? "border-[#64748B] bg-[#0F172A]"
-                : "border-[#64748B] bg-[#FFFFFF]",
+                ? "border-[var(--app-border)] bg-[var(--app-surface)]"
+                : "border-[var(--app-border)] bg-[var(--app-surface)]",
             ].join(" ")}
           >
             <Outlet />
