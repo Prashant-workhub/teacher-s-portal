@@ -24,9 +24,17 @@ const Header = () => {
       }}
     >
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
-          <div className={`rounded-md px-3 py-2 text-3xl font-semibold tracking-[0.12em] text-white`}>
-            NOTEIT 
+        <div className="flex items-center gap-3">
+          <div className="rounded-md px-3 py-2 text-3xl font-semibold tracking-[0.12em] text-white">
+            NOTEIT
+          </div>
+          <div className="hidden min-w-0 flex-col leading-tight md:flex">
+            <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--app-muted)]">
+              Faculty portal
+            </span>
+            <span className="text-sm font-medium text-[var(--app-text)]">
+              Teacher workspace
+            </span>
           </div>
         </div>
 

@@ -1,3 +1,4 @@
+import { ChevronDown } from "lucide-react";
 import { useTheme } from "../components/theme/ThemeProvider";
 import type { KpiData, KpiSubject } from "../types/kpi";
 
@@ -93,18 +94,28 @@ const KpiCard = ({ data, subjectOptions, onSubjectChange }: KpiCardProps) => {
             <select
               aria-label="Select KPI subject"
               className={[
-                "min-w-[12rem] rounded-xl border px-3 py-2 pr-9 text-sm font-medium outline-none transition",
-                "appearance-none border-[var(--app-border)] bg-[var(--app-surface-alt)] text-[var(--app-text)]",
+                "peer min-w-[12rem] appearance-none rounded-xl border px-3.5 py-2.5 pr-10 text-sm font-medium outline-none transition",
+                "border-[var(--app-border)]/90 bg-[var(--app-surface-alt)]/95 text-[var(--app-text)] shadow-sm",
+                "hover:border-[var(--app-brand)]/55 hover:bg-[var(--app-surface-alt)] focus:border-[var(--app-brand)] focus:ring-2 focus:ring-[var(--app-brand)]/20",
               ].join(" ")}
               onChange={(event) => onSubjectChange(event.target.value)}
               value={data.subject.id}
             >
               {subjectOptions.map((subject) => (
-                <option key={subject.id} value={subject.id}>
+                <option
+                  key={subject.id}
+                  className="bg-[var(--app-surface)] text-[var(--app-text)]"
+                  value={subject.id}
+                >
                   {subject.label}
                 </option>
               ))}
             </select>
+            <ChevronDown
+              aria-hidden="true"
+              className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--app-muted)] transition peer-hover:text-[var(--app-brand)] peer-focus:text-[var(--app-brand)]"
+              size={16}
+            />
           </label>
 
           <a
