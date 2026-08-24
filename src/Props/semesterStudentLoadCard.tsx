@@ -44,7 +44,7 @@ const SemesterStudentLoadCard = ({ data }: { data: SemesterStudentLoadData }) =>
         </a>
       </div>
 
-      <div className="mt-4 flex h-44 items-end gap-2">
+      <div className="mt-4 flex h-48 items-end gap-2">
         {data.semesters.map((semester) => {
           const barHeight = Math.max(
             (semester.studentCount / maxCount) * 100,
@@ -77,7 +77,7 @@ const SemesterStudentLoadCard = ({ data }: { data: SemesterStudentLoadData }) =>
         })}
       </div>
 
-      <div className={`mt-4 grid grid-cols-3 gap-2 border-t pt-3 ${footerShell}`}>
+      <div className={`mt-4 h-15 rounded-lg grid grid-cols-3 gap-2 border-t pt-3 ${footerShell}`}>
         <div className="min-w-0 text-center">
           <p className={`text-[11px] leading-4 ${mutedText}`}>Total</p>
           <p className={`mt-1 text-sm font-semibold ${mainText}`}>{totalStudents}</p>

@@ -50,3 +50,12 @@ export type SemesterStudentLoadData = {
   subject: KpiSubject;
   semesters: SemesterStudentLoadSemester[];
 };
+
+export type RecentActivity = {
+  id: number;
+  title: string;
+  description: string;
+  time: string;
+};
+
+export type recentActivity = RecentActivity;
