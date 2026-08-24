@@ -13,10 +13,10 @@ const KpiCard = ({ data }: { data: KpiData }) => {
   const gridStroke = "#64748B";
   const gridOpacity = isDark ? 0.28 : 0.18;
 
-  const chartWidth = Math.max(420, data.students.length * 88 + 120);
-  const chartHeight = 250;
-  const chartTop = 26;
-  const chartBottom = 188;
+  const chartWidth = Math.max(400, data.students.length * 80 + 100);
+  const chartHeight = 220;
+  const chartTop = 24;
+  const chartBottom = 162;
   const chartLeft = 48;
   const chartRight = 52;
   const plotWidth = chartWidth - chartLeft - chartRight;
@@ -43,7 +43,7 @@ const KpiCard = ({ data }: { data: KpiData }) => {
   const tickValues = [axisMax, axisMax * 0.75, axisMax * 0.5, axisMax * 0.25, 0];
 
   return (
-    <div className={`h-full min-h-[32rem] w-full min-w-0 overflow-hidden rounded-2xl border p-5 ${shellClass}`}>
+    <div className={`h-full min-h-[28rem] w-full min-w-0 overflow-hidden rounded-2xl border p-5 ${shellClass}`}>
       <div className="mb-4 flex h-10 items-center justify-between gap-3">
         <h5 className="min-w-0 truncate text-base font-semibold leading-none">
           {data.subject.label}
@@ -65,7 +65,7 @@ const KpiCard = ({ data }: { data: KpiData }) => {
       <div className="relative">
         <svg
           aria-label={`${data.subject.label} KPI chart`}
-          className="h-[250px] w-full"
+          className="h-[220px] w-full"
           preserveAspectRatio="xMidYMid meet"
           role="img"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
@@ -130,9 +130,9 @@ const KpiCard = ({ data }: { data: KpiData }) => {
                 <circle cx={x} cy={barTop} r="5" fill={student.color} />
                 <text
                   x={x}
-                  y={chartHeight - 20}
+                  y={chartHeight - 16}
                   fill={mainText}
-                  fontSize="13"
+                  fontSize="12"
                   fontWeight="600"
                   textAnchor="middle"
                 >
@@ -159,20 +159,13 @@ const KpiCard = ({ data }: { data: KpiData }) => {
           })}
 
           <rect x={badgeX} y={badgeY} rx="4" ry="4" width={badgeWidth} height="24" fill="#DC2626" />
-          <text
-            x={badgeX + badgeWidth / 2}
-            y={badgeY + 16}
-            fill="#FFFFFF"
-            fontSize="12"
-            fontWeight="700"
-            textAnchor="middle"
-          >
+          <text x={badgeX + badgeWidth / 2} y={badgeY + 16} fill="#FFFFFF" fontSize="12" fontWeight="700" textAnchor="middle">
             {data.target.value}
           </text>
         </svg>
       </div>
 
-      <div className="mt-1 grid grid-cols-3 gap-2 border-t border-[#64748B] pt-4">
+      <div className="mt-1 grid grid-cols-3 gap-2 border-t border-[#64748B] pt-3.5">
         {data.metrics.map((metric) => (
           <div key={metric.label} className="min-w-0 text-center">
             <p className={`text-[11px] leading-4 ${mutedText}`}>{metric.label}</p>

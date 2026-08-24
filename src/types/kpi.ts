@@ -23,3 +23,18 @@ export type KpiData = {
     value: number;
   };
 };
+
+export type FacultyPendingDoubtsSubject = {
+  id: string;
+  label: string;
+};
+
+export type FacultyPendingDoubtsData = {
+  subject: FacultyPendingDoubtsSubject;
+  queue: {
+    openQuestionsCount: number;
+    overdueQuestionsCount: number;
+    solvedThisWeekCount: number;
+    responseTargetHours: number;
+  };
+};
