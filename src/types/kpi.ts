@@ -38,3 +38,15 @@ export type FacultyPendingDoubtsData = {
     responseTargetHours: number;
   };
 };
+
+export type SemesterStudentLoadSemester = {
+  id: string;
+  label: string;
+  studentCount: number;
+  color: string;
+};
+
+export type SemesterStudentLoadData = {
+  subject: KpiSubject;
+  semesters: SemesterStudentLoadSemester[];
+};

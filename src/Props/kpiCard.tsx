@@ -10,6 +10,7 @@ const KpiCard = ({ data }: { data: KpiData }) => {
     : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
   const mutedText = "text-[#64748B]";
   const mainText = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
+  const labelFill = isDark ? "#F8FAFC" : "#0F172A";
   const gridStroke = "#64748B";
   const gridOpacity = isDark ? 0.28 : 0.18;
 
@@ -43,8 +44,8 @@ const KpiCard = ({ data }: { data: KpiData }) => {
   const tickValues = [axisMax, axisMax * 0.75, axisMax * 0.5, axisMax * 0.25, 0];
 
   return (
-    <div className={`h-full min-h-[28rem] w-full min-w-0 overflow-hidden rounded-2xl border p-5 ${shellClass}`}>
-      <div className="mb-4 flex h-10 items-center justify-between gap-3">
+    <div className={`h-full min-h-[26rem] w-full min-w-0 overflow-hidden rounded-2xl border p-4 ${shellClass}`}>
+      <div className="mb-3 flex h-9 items-center justify-between gap-3">
         <h5 className="min-w-0 truncate text-base font-semibold leading-none">
           {data.subject.label}
         </h5>
@@ -65,7 +66,7 @@ const KpiCard = ({ data }: { data: KpiData }) => {
       <div className="relative">
         <svg
           aria-label={`${data.subject.label} KPI chart`}
-          className="h-[220px] w-full"
+          className="h-[206px] w-full"
           preserveAspectRatio="xMidYMid meet"
           role="img"
           viewBox={`0 0 ${chartWidth} ${chartHeight}`}
@@ -131,9 +132,9 @@ const KpiCard = ({ data }: { data: KpiData }) => {
                 <text
                   x={x}
                   y={chartHeight - 16}
-                  fill={mainText}
+                  fill={labelFill}
                   fontSize="12"
-                  fontWeight="600"
+                  fontWeight="700"
                   textAnchor="middle"
                 >
                   {student.grade}
@@ -165,7 +166,7 @@ const KpiCard = ({ data }: { data: KpiData }) => {
         </svg>
       </div>
 
-      <div className="mt-1 grid grid-cols-3 gap-2 border-t border-[#64748B] pt-3.5">
+      <div className="mt-1 grid grid-cols-3 gap-2 border-t border-[#64748B] pt-3">
         {data.metrics.map((metric) => (
           <div key={metric.label} className="min-w-0 text-center">
             <p className={`text-[11px] leading-4 ${mutedText}`}>{metric.label}</p>
