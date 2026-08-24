@@ -11,6 +11,7 @@ import LearningAnalytics from "./components/learning-analytics/LearningAnalytics
 import LectureInsights from "./components/lecture-insights/LectureInsights";
 import AnnouncementsResources from "./components/announcements-resources/AnnouncementsResources";
 import ProfileSettings from "./components/profile-settings/ProfileSettings";
+import ActivityCenter from "./components/activityCenter/ActivityCenter";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path='lecture-insights' element={<LectureInsights />} />
       <Route path='announcements-resources' element={<AnnouncementsResources />} />
       <Route path='profile-settings' element={<ProfileSettings />} />
+      <Route path='activity' element={<ActivityCenter />} />
       <Route path='*' element={<NotFound />} />
     </Route>,
   ),

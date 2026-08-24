@@ -1,6 +1,6 @@
 import type { RecentActivity } from "../../types/kpi";
 
-const recentActivities: RecentActivity[] = [
+const recentActivitiesData: RecentActivity[] = [
   {
     id: 1,
     title: "New course added",
@@ -33,4 +33,4 @@ const recentActivities: RecentActivity[] = [
   }
 ];
 
-export default recentActivities;
+export default recentActivitiesData;

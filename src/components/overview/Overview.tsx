@@ -41,7 +41,7 @@ const Overview = ({ recentActivities = recentActivitiesData }: OverviewProps) =>
             subjectOptions={subjectPerformanceKpiOptions.map((item) => item.subject)}
           />
         </div>
-        <div className="h-full md:col-span-2 xl:col-span-1">
+        <div className="h-120 overflow-auto scrollbar-thin scrollbar-thumb-[var(--app-border)] scrollbar-track-[var(--app-surface)] md:col-span-2 xl:col-span-1">
           <RecentActivities data={recentActivities} />
         </div>
       </section>

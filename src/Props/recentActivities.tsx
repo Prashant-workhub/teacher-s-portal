@@ -7,7 +7,7 @@ type RecentActivitiesProps = {
 
 const RecentActivities = ({ data }: RecentActivitiesProps) => {
   return (
-    <div className="min-w-0 overflow-auto max-h-120 rounded-2xl border border-[var(--app-border)] bg-[var(--app-surface)] p-4 text-[var(--app-text)] shadow-sm">
+    <div className="min-w-0 overflow-auto max-h-full rounded-2xl border border-[var(--app-border)] bg-[var(--app-surface)] p-4 text-[var(--app-text)] shadow-sm">
       <div className="mb-4 flex items-center justify-between gap-3">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--app-muted)]">

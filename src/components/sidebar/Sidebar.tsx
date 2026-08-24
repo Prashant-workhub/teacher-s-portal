@@ -33,7 +33,7 @@ const workspaceItems = [
 ];
 
 const controlItems = [
-  { label: "Activity Center", to: "/overview", icon: BellRing, badge: "LIVE" },
+  { label: "Activity Center", to: "/activity", icon: BellRing, badge: "LIVE" },
   { label: "Profile & Settings", to: "/profile-settings", icon: Settings },
 ];
 
@@ -96,7 +96,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
         </button>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-4 py-5">
+      <div className="flex-1 scroll-container scrollbar-thin scrollbar-thumb-[var(--app-border)] scrollbar-track-[var(--app-surface)] overflow-y-auto px-4 py-5">
         <div className="space-y-7">
           <section>
             {!collapsed ? (
