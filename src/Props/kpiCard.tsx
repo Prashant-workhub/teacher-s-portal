@@ -1,103 +1,140 @@
 import { useTheme } from "../components/theme/ThemeProvider";
-
-type KpiStudent = {
-  grade: string;
-  value: number;
-  barHeight: number;
-  barColor: string;
-  lineColor: string;
-};
-
-type KpiMetric = {
-  label: string;
-  value: string;
-  tone: "neutral" | "success";
-};
-
-type KpiData = {
-  subject: string;
-  students: KpiStudent[];
-  metrics: KpiMetric[];
-  target: {
-    value: number;
-  };
-};
+import type { KpiData } from "../types/kpi";
 
 const KpiCard = ({ data }: { data: KpiData }) => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+
   const shellClass = isDark
     ? "border-[#64748B] bg-[#0F172A] text-[#F8FAFC]"
     : "border-[#64748B] bg-[#FFFFFF] text-[#0F172A]";
   const mutedText = "text-[#64748B]";
   const mainText = isDark ? "text-[#F8FAFC]" : "text-[#0F172A]";
-  const lineY = 96;
-  const targetY = 70;
-  const chartBottom = 180;
-  const chartHeight = chartBottom - 28;
-  const maxValue = 36;
-  const positions = [60, 145, 230, 315, 400];
+  const gridStroke = "#64748B";
+  const gridOpacity = isDark ? 0.28 : 0.18;
+
+  const chartWidth = Math.max(420, data.students.length * 88 + 120);
+  const chartHeight = 250;
+  const chartTop = 26;
+  const chartBottom = 188;
+  const chartLeft = 48;
+  const chartRight = 52;
+  const plotWidth = chartWidth - chartLeft - chartRight;
+  const plotHeight = chartBottom - chartTop;
+
+  const maxObservedValue = Math.max(
+    ...data.students.map((student) => student.value),
+    data.target.value,
+    1,
+  );
+  const axisMax = Math.ceil(maxObservedValue / 5) * 5;
+  const scaleY = (value: number) =>
+    chartTop + plotHeight - (value / axisMax) * plotHeight;
+
+  const segmentWidth = plotWidth / data.students.length;
+  const barWidth = Math.min(56, segmentWidth * 0.62);
+  const positions = data.students.map(
+    (_, index) => chartLeft + segmentWidth * index + segmentWidth / 2,
+  );
+  const targetY = scaleY(data.target.value);
+  const badgeWidth = 42;
+  const badgeX = chartWidth - chartRight + 4 - badgeWidth;
+  const badgeY = Math.min(Math.max(targetY - 12, 18), chartHeight - 36);
+  const tickValues = [axisMax, axisMax * 0.75, axisMax * 0.5, axisMax * 0.25, 0];
 
   return (
-    <div className={`h-full w-full min-w-0 max-h-80 overflow-hidden rounded-2xl border p-5 ${shellClass}`}>
+    <div className={`h-full min-h-[32rem] w-full min-w-0 overflow-hidden rounded-2xl border p-5 ${shellClass}`}>
       <div className="mb-4 flex h-10 items-center justify-between gap-3">
-        <h5 className="min-w-0 truncate text-base font-semibold leading-none">{data.subject}</h5>
-        <a href="#" className="font-medium text-[#2563EB] hover:underline">
+        <h5 className="min-w-0 truncate text-base font-semibold leading-none">
+          {data.subject.label}
+        </h5>
+        <a
+          aria-label={`View all KPI details for ${data.subject.label}`}
+          href={`/course-progress?subject=${data.subject.id}`}
+          className="font-medium text-[#2563EB] hover:underline"
+        >
           View all
         </a>
       </div>
 
+      <p className="sr-only">
+        KPI chart for {data.subject.label}. The chart shows grade distribution and
+        summary metrics for {data.subject.label}.
+      </p>
+
       <div className="relative">
         <svg
-          aria-label={`${data.subject} KPI chart`}
-          className="h-[230px] w-full"
-          viewBox="0 0 440 230"
+          aria-label={`${data.subject.label} KPI chart`}
+          className="h-[250px] w-full"
+          preserveAspectRatio="xMidYMid meet"
           role="img"
+          viewBox={`0 0 ${chartWidth} ${chartHeight}`}
         >
-          <line x1="40" x2="418" y1="28" y2="28" stroke="#64748B" strokeDasharray="5 5" strokeOpacity="0.35" />
-          <line x1="40" x2="418" y1="70" y2="70" stroke="#64748B" strokeDasharray="5 5" strokeOpacity="0.35" />
-          <line x1="40" x2="418" y1="112" y2="112" stroke="#64748B" strokeDasharray="5 5" strokeOpacity="0.35" />
-          <line x1="40" x2="418" y1="154" y2="154" stroke="#64748B" strokeDasharray="5 5" strokeOpacity="0.35" />
-          <line x1="40" x2="418" y1="196" y2="196" stroke="#64748B" strokeDasharray="5 5" strokeOpacity="0.35" />
+          {tickValues.map((tickValue, index) => {
+            const y = scaleY(tickValue);
+            return (
+              <line
+                key={`${tickValue}-${index}`}
+                x1={chartLeft}
+                x2={chartWidth - chartRight}
+                y1={y}
+                y2={y}
+                stroke={gridStroke}
+                strokeDasharray="5 5"
+                strokeOpacity={gridOpacity}
+              />
+            );
+          })}
 
-          <line x1="40" x2="400" y1={lineY} y2={lineY} stroke="#2563EB" strokeWidth="2" />
-          <line x1="40" x2="400" y1={targetY} y2={targetY} stroke="#16A34A" strokeWidth="2" />
-          <line x1="40" x2="400" y1="128" y2="128" stroke="#DC2626" strokeWidth="2" strokeDasharray="4 4" />
+          <line
+            x1={chartLeft}
+            x2={chartWidth - chartRight}
+            y1={targetY}
+            y2={targetY}
+            stroke="#16A34A"
+            strokeWidth="2"
+          />
 
           {data.students.map((student, index) => {
             const x = positions[index];
-            const chartValue = student.barHeight ?? (student.value / maxValue) * chartHeight;
-            const barTop = chartBottom - chartValue;
-            const isBlue = student.barColor === "#2563EB";
+            const barHeight = (student.value / axisMax) * plotHeight;
+            const barTop = chartBottom - barHeight;
+            const tooltipLabel = `${student.grade} — ${student.value} students`;
 
             return (
-              <g key={student.grade}>
+              <g
+                key={`${data.subject.id}-${student.grade}`}
+                aria-label={tooltipLabel}
+                tabIndex={0}
+              >
+                <title>{tooltipLabel}</title>
+                <desc>{`Grade ${student.grade} has ${student.value} students.`}</desc>
                 <rect
-                  x={x - 24}
+                  x={x - barWidth / 2}
                   y={barTop}
                   rx="8"
                   ry="8"
-                  width="48"
-                  height={chartValue}
-                  fill={student.barColor}
-                  fillOpacity={isBlue ? "0.28" : "0.22"}
+                  width={barWidth}
+                  height={barHeight}
+                  fill={student.color}
+                  fillOpacity={isDark ? 0.24 : 0.18}
                 />
                 <line
                   x1={x}
                   x2={x}
                   y1={barTop}
                   y2={chartBottom}
-                  stroke={student.lineColor}
+                  stroke={student.color}
                   strokeWidth="2.5"
                 />
-                <circle cx={x} cy={barTop} r="5" fill={student.lineColor} />
+                <circle cx={x} cy={barTop} r="5" fill={student.color} />
                 <text
                   x={x}
-                  y="216"
-                  textAnchor="middle"
-                  fill={isDark ? "#F8FAFC" : "#0F172A"}
+                  y={chartHeight - 20}
+                  fill={mainText}
                   fontSize="13"
                   fontWeight="600"
+                  textAnchor="middle"
                 >
                   {student.grade}
                 </text>
@@ -105,24 +142,31 @@ const KpiCard = ({ data }: { data: KpiData }) => {
             );
           })}
 
-          <text x="16" y="200" fill="#64748B" fontSize="11" fontWeight="500">
-            0
-          </text>
-          <text x="10" y="158" fill="#64748B" fontSize="11" fontWeight="500">
-            9
-          </text>
-          <text x="4" y="116" fill="#64748B" fontSize="11" fontWeight="500">
-            17
-          </text>
-          <text x="4" y="74" fill="#64748B" fontSize="11" fontWeight="500">
-            26
-          </text>
-          <text x="4" y="32" fill="#64748B" fontSize="11" fontWeight="500">
-            34
-          </text>
+          {tickValues.map((tickValue, index) => {
+            const y = scaleY(tickValue);
+            return (
+              <text
+                key={`tick-${tickValue}-${index}`}
+                x="14"
+                y={y + 4}
+                fill={gridStroke}
+                fontSize="11"
+                fontWeight="500"
+              >
+                {Math.round(tickValue)}
+              </text>
+            );
+          })}
 
-          <rect x="396" y={lineY - 12} rx="4" ry="4" width="38" height="24" fill="#DC2626" />
-          <text x="415" y={lineY + 5} textAnchor="middle" fill="#FFFFFF" fontSize="12" fontWeight="700">
+          <rect x={badgeX} y={badgeY} rx="4" ry="4" width={badgeWidth} height="24" fill="#DC2626" />
+          <text
+            x={badgeX + badgeWidth / 2}
+            y={badgeY + 16}
+            fill="#FFFFFF"
+            fontSize="12"
+            fontWeight="700"
+            textAnchor="middle"
+          >
             {data.target.value}
           </text>
         </svg>
