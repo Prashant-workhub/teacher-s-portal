@@ -93,7 +93,7 @@ const CourseCard = ({ course, viewMode = "grid" }: CourseCardProps) => {
               <MessageSquareText size={15} />
               Doubts
             </div>
-            <p className="mt-1 text-base font-semibold text-[var(--app-text)]">{course.doubts}</p>
+            <p className="mt-1 ml-5 text-base font-semibold text-[var(--app-text)]">{course.doubts}</p>
           </div>
         </div>
 
