@@ -1,5 +1,4 @@
-import { Bell, MoonStar, Search, SunMedium } from "lucide-react";
-import { useTheme } from "../theme/ThemeProvider";
+import { Bell, MoonStar, Search, SunMedium, useTheme } from "../imports";
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();

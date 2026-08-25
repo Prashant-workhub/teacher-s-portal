@@ -5,10 +5,11 @@ import {
   BarChart3,
   BookOpen,
   Compass,
+  Link,
   Megaphone,
   Settings2,
-} from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+  useNavigate,
+} from "../imports";
 
 const waypoints = [
   {

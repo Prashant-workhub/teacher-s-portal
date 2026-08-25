@@ -1,5 +1,10 @@
-import { AlertCircle, CheckCircle2, Clock, Inbox } from "lucide-react";
-import type { FacultyPendingDoubtsData } from "../types/kpi";
+import {
+  AlertCircle,
+  CheckCircle2,
+  Clock,
+  Inbox,
+  type FacultyPendingDoubtsData,
+} from "../components/imports";
 
 const FacultyPendingDoubtsCard = ({ data }: { data: FacultyPendingDoubtsData }) => {
   const shellClass = "border-[var(--app-border)] bg-[var(--app-surface)] text-[var(--app-text)]";

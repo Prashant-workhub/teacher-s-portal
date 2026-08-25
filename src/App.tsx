@@ -1,17 +1,21 @@
 import "./App.css";
-import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
-import Layout from "./components/layout/layout";
-import NotFound from "./components/not-found/NotFound";
-import Overview from "./components/overview/Overview";
-import MyCourses from "./components/my-courses/MyCourses";
-import CourseProgress from "./components/course-progress/CourseProgress";
-import StudentDoubts from "./components/student-doubts/StudentDoubts";
-import QuizPerformance from "./components/quiz-performance/QuizPerformance";
-import LearningAnalytics from "./components/learning-analytics/LearningAnalytics";
-import LectureInsights from "./components/lecture-insights/LectureInsights";
-import AnnouncementsResources from "./components/announcements-resources/AnnouncementsResources";
-import ProfileSettings from "./components/profile-settings/ProfileSettings";
-import ActivityCenter from "./components/activityCenter/ActivityCenter";
+import {
+  ActivityCenter,
+  AnnouncementsResources,
+  CourseProgress,
+  Layout,
+  LearningAnalytics,
+  LectureInsights,
+  MyCourses,
+  NotFound,
+  Overview,
+  ProfileSettings,
+  QuizPerformance,
+  Route,
+  StudentDoubts,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "./components/imports";
 
 function App() {
   return (

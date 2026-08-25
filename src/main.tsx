@@ -1,9 +1,5 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import {router} from './App.tsx'
-import { RouterProvider } from 'react-router-dom'
-import { ThemeProvider } from './components/theme/ThemeProvider'
+import "./index.css";
+import { RouterProvider, StrictMode, ThemeProvider, createRoot, router } from "./components/imports";
 
 
 

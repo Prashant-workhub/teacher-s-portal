@@ -1,8 +1,4 @@
-import Header from "../header/Header";
-import Sidebar from "../sidebar/Sidebar";
-import { Outlet } from "react-router-dom";
-import { useState } from "react";
-import { useTheme } from "../theme/ThemeProvider";
+import { Header, Outlet, Sidebar, useState, useTheme } from "../imports";
 
 const Layout = () => {
   const { theme } = useTheme();

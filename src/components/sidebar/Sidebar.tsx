@@ -9,12 +9,12 @@ import {
   GraduationCap,
   LayoutDashboard,
   Mic,
+  NavLink,
   PanelTopOpen,
   Settings,
   Sparkles,
-} from "lucide-react";
-import { NavLink } from "react-router-dom";
-import { useTheme } from "../theme/ThemeProvider";
+  useTheme,
+} from "../imports";
 
 type SidebarProps = {
   collapsed: boolean;

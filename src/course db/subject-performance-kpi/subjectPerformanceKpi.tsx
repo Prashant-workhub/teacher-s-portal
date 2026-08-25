@@ -1,4 +1,4 @@
-import type { KpiData } from "../../types/kpi";
+import type { KpiData } from "../../components/imports";
 
 const createSubjectPerformanceKpi = (
   subject: KpiData["subject"],

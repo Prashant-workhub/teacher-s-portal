@@ -1,4 +1,4 @@
-import type { RecentActivity } from "../../types/kpi";
+import type { RecentActivity } from "../imports";
 
 const recentActivitiesData: RecentActivity[] = [
   {

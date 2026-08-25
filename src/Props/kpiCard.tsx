@@ -1,6 +1,4 @@
-import { ChevronDown } from "lucide-react";
-import { useTheme } from "../components/theme/ThemeProvider";
-import type { KpiData, KpiSubject } from "../types/kpi";
+import { ChevronDown, useTheme, type KpiData, type KpiSubject } from "../components/imports";
 
 type KpiCardProps = {
   data: KpiData;

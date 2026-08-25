@@ -1,11 +1,10 @@
-import { ArrowRight, Clock3 } from "lucide-react";
-import type { RecentActivity } from "../types/kpi";
+import { ArrowRight, Clock3, type RecentActivity } from "../components/imports";
 
 type RecentActivitiesProps = {
   data: RecentActivity[];
 };
 
-const RecentActivities = ({ data }: RecentActivitiesProps) => {
+const RecentActivities = ({ data , link , btn}: RecentActivitiesProps & { link: string } & {btn : boolean}) => {
   return (
     <div className="min-w-0 overflow-auto max-h-full rounded-2xl border border-[var(--app-border)] bg-[var(--app-surface)] p-4 text-[var(--app-text)] shadow-sm">
       <div className="mb-4 flex items-center justify-between gap-3">
@@ -17,10 +16,14 @@ const RecentActivities = ({ data }: RecentActivitiesProps) => {
         </div>
         <a
           className="inline-flex items-center gap-1 text-sm font-medium text-[var(--app-brand)] hover:underline"
-          href="#"
+          href={link}
         >
-          View all
-          <ArrowRight size={15} />
+          {btn && (
+            <>
+              View all
+              <ArrowRight size={15} />
+            </>
+          )}
         </a>
       </div>
 

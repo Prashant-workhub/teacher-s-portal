@@ -1,4 +1,4 @@
-import type { SemesterStudentLoadData } from "../types/kpi";
+import type { SemesterStudentLoadData } from "../components/imports";
 
 const SemesterStudentLoadCard = ({ data }: { data: SemesterStudentLoadData }) => {
   const shellClass = "border-[var(--app-border)] bg-[var(--app-surface)] text-[var(--app-text)]";

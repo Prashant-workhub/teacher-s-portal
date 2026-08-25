@@ -1,17 +1,18 @@
-import FacultyPendingDoubtsCard from "../../Props/facultyPendingDoubtsCard";
-import SemesterStudentLoadCard from "../../Props/semesterStudentLoadCard";
-import RecentActivities from "../../Props/recentActivities";
-import Subjects from "../../course db/completion/c_completion";
-import facultyPendingDoubts from "../../course db/faculty-pending-doubts/facultyPendingDoubts";
-import recentActivitiesData from "../facultydb/facultydb";
-import semesterStudentLoad from "../../course db/semester-student-load/semesterStudentLoad";
-import SubjectProgressBars from "../../Props/progressBar";
-import subjectPerformanceKpi, {
+import {
+  FacultyPendingDoubtsCard,
+  KpiCard,
+  RecentActivities,
+  SubjectProgressBars,
+  Subjects,
+  facultyPendingDoubts,
+  recentActivitiesData,
+  semesterStudentLoad,
+  SemesterStudentLoadCard,
+  subjectPerformanceKpi,
   subjectPerformanceKpiOptions,
-} from "../../course db/subject-performance-kpi/subjectPerformanceKpi";
-import KpiCard from "../../Props/kpiCard";
-import { useState } from "react";
-import type { RecentActivity } from "../../types/kpi";
+  type RecentActivity,
+  useState,
+} from "../imports";
 
 type OverviewProps = {
   recentActivities?: RecentActivity[];
@@ -42,7 +43,7 @@ const Overview = ({ recentActivities = recentActivitiesData }: OverviewProps) =>
           />
         </div>
         <div className="h-120 overflow-auto scrollbar-thin scrollbar-thumb-[var(--app-border)] scrollbar-track-[var(--app-surface)] md:col-span-2 xl:col-span-1">
-          <RecentActivities data={recentActivities} />
+          <RecentActivities data={recentActivities} link={"/"} btn={true} />
         </div>
       </section>
     </div>

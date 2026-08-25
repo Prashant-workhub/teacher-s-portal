@@ -1,4 +1,4 @@
-import type { FacultyPendingDoubtsData } from "../../types/kpi";
+import type { FacultyPendingDoubtsData } from "../../components/imports";
 
 const facultyPendingDoubts: FacultyPendingDoubtsData = {
   subject: {

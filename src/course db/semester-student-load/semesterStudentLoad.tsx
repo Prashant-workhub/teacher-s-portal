@@ -1,4 +1,4 @@
-import type { SemesterStudentLoadData } from "../../types/kpi";
+import type { SemesterStudentLoadData } from "../../components/imports";
 
 const semesterStudentLoad: SemesterStudentLoadData = {
   subject: {
