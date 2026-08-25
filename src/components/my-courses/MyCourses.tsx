@@ -1,6 +1,7 @@
 import {
   ChevronDown,
   CourseCard,
+  CourseStatCard,
   LayoutGrid,
   List,
   Search,
@@ -8,6 +9,7 @@ import {
   courseFilterOptions,
   courseSortOptions,
   courseStatusOptions,
+  courseStats,
   type CourseFilterOption,
   type CourseStatusFilter,
   type CourseViewMode,
@@ -61,6 +63,21 @@ const MyCourses = () => {
         <p className="text-sm text-[var(--app-muted)]">
           Browse course cards, filter by teaching load, and track performance at a glance.
         </p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+        {courseStats.map((stat) => (
+          <CourseStatCard
+            key={stat.title}
+            icon={stat.icon}
+            iconClassName={stat.iconClassName}
+            subtitle={stat.subtitle}
+            subtitleClassName={stat.subtitleClassName}
+            title={stat.title}
+            value={stat.value}
+            valueClassName={stat.valueClassName}
+          />
+        ))}
       </div>
 
       <div className="flex flex-col gap-3 rounded-2xl border border-[var(--app-border)] bg-[var(--app-surface)] p-3 lg:flex-row lg:items-center">
