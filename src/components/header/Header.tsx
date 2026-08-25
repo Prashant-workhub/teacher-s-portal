@@ -1,4 +1,4 @@
-import { Bell, MoonStar, Search, SunMedium, useTheme } from "../imports";
+import { Bell, MoonStar, NavLink, Search, SunMedium, useTheme } from "../imports";
 
 const Header = () => {
   const { theme, toggleTheme } = useTheme();
@@ -24,8 +24,8 @@ const Header = () => {
     >
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-3">
-          <div className="rounded-md px-3 py-2 text-3xl font-semibold tracking-[0.12em] text-white">
-            NOTEIT
+          <div className="cursor-pointer rounded-md px-3 py-2 text-3xl font-semibold tracking-[0.12em]">
+            <NavLink to="/">Noteit</NavLink>
           </div>
           <div className="hidden min-w-0 flex-col leading-tight md:flex">
             <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--app-muted)]">
@@ -69,7 +69,7 @@ const Header = () => {
           <button
             aria-label="Toggle theme"
             className={[
-              "grid h-10 w-10 place-items-center rounded-xl border transition hover:scale-[1.02]",
+              "grid h-10 w-10 place-items-center cursor-pointer rounded-xl border transition hover:scale-[1.02]",
               shellBorder,
               panelBg,
               brandText,
@@ -80,24 +80,22 @@ const Header = () => {
             {theme === "dark" ? <SunMedium size={18} /> : <MoonStar size={18} />}
           </button>
 
-          <button
+          <NavLink
             aria-label="Notifications"
             className={[
-              "relative grid h-10 w-10 place-items-center rounded-xl border transition hover:scale-[1.02]",
+              "relative cursor-pointer grid h-10 w-10 place-items-center rounded-xl border transition hover:scale-[1.02]",
               shellBorder,
               panelBg,
               textMain,
             ].join(" ")}
-            type="button"
+            to="/activity"
           >
             <Bell size={18} />
             <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-[#DC2626]" />
-          </button>
+          </NavLink>
 
           <div className={`${brandBg} h-10 w-10 rounded-xl p-0.5`}>
-            <div className="grid h-full w-full place-items-center rounded-[10px] bg-white text-sm font-semibold text-[var(--app-brand-strong)]">
-              A
-            </div>
+              <NavLink className="cursor-pointer grid h-full w-full place-items-center rounded-[10px] bg-white text-sm font-semibold text-[var(--app-brand-strong)]" to="/profile-settings"> A </NavLink>
           </div>
         </div>
       </div>
