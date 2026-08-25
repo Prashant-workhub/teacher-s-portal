@@ -44,9 +44,11 @@ export {
   PanelTopOpen,
   Search,
   Settings,
+  Calendar,
   Settings2,
   Sparkles,
   SunMedium,
+  Users,
 } from "lucide-react";
 export { ThemeProvider, useTheme } from "./theme/ThemeProvider";
 export { default as Header } from "./header/Header";
@@ -71,6 +73,7 @@ export { default as KpiCard } from "../Props/kpiCard";
 export { default as FacultyPendingDoubtsCard } from "../Props/facultyPendingDoubtsCard";
 export { default as SemesterStudentLoadCard } from "../Props/semesterStudentLoadCard";
 export { default as SubjectProgressBars } from "../Props/progressBar";
+export { default as CourseStatCard } from "../Props/4infocards";
 export { default as Subjects } from "../course db/completion/c_completion";
 export { default as facultyPendingDoubts } from "../course db/faculty-pending-doubts/facultyPendingDoubts";
 export { default as semesterStudentLoad } from "../course db/semester-student-load/semesterStudentLoad";
