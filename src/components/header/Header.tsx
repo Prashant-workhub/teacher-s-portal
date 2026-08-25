@@ -1,6 +1,10 @@
-import { Bell, MoonStar, NavLink, Search, SunMedium, useTheme } from "../imports";
+import { Bell, Menu, MoonStar, NavLink, Search, SunMedium, useTheme } from "../imports";
 
-const Header = () => {
+type HeaderProps = {
+  onMobileSidebarToggle?: () => void;
+};
+
+const Header = ({ onMobileSidebarToggle }: HeaderProps) => {
   const { theme, toggleTheme } = useTheme();
   const brandBg = "bg-[var(--app-brand)]";
   const brandText = "text-[var(--app-brand)]";
@@ -24,7 +28,16 @@ const Header = () => {
     >
       <div className="flex items-center gap-3">
         <div className="flex items-center gap-3">
-          <div className="cursor-pointer rounded-md px-3 py-2 text-3xl font-semibold tracking-[0.12em]">
+          <button
+            aria-label="Open navigation menu"
+            className="grid h-10 w-10 place-items-center rounded-xl border md:hidden"
+            onClick={onMobileSidebarToggle}
+            type="button"
+          >
+            <Menu size={18} />
+          </button>
+
+          <div className="cursor-pointer rounded-md px-1 py-2 text-2xl font-semibold tracking-[0.12em] sm:px-3 sm:text-3xl">
             <NavLink to="/">Noteit</NavLink>
           </div>
           <div className="hidden min-w-0 flex-col leading-tight md:flex">
@@ -95,7 +108,12 @@ const Header = () => {
           </NavLink>
 
           <div className={`${brandBg} h-10 w-10 rounded-xl p-0.5`}>
-              <NavLink className="cursor-pointer grid h-full w-full place-items-center rounded-[10px] bg-white text-sm font-semibold text-[var(--app-brand-strong)]" to="/profile-settings"> A </NavLink>
+            <NavLink
+              className="grid h-full w-full place-items-center rounded-[10px] bg-white text-sm font-semibold text-[var(--app-brand-strong)]"
+              to="/profile-settings"
+            >
+              A
+            </NavLink>
           </div>
         </div>
       </div>

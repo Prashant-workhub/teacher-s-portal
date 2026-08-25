@@ -42,6 +42,7 @@ export {
   LayoutDashboard,
   List,
   Megaphone,
+  Menu,
   Mic,
   MoonStar,
   PanelTopOpen,

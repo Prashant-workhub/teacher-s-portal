@@ -18,6 +18,8 @@ import {
 
 type SidebarProps = {
   collapsed: boolean;
+  mobileOpen?: boolean;
+  onClose?: () => void;
   onToggleCollapse: () => void;
 };
 
@@ -37,7 +39,7 @@ const controlItems = [
   { label: "Profile & Settings", to: "/profile-settings", icon: Settings },
 ];
 
-const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
+const Sidebar = ({ collapsed, mobileOpen = false, onClose, onToggleCollapse }: SidebarProps) => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
 
@@ -55,10 +57,12 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
   return (
     <aside
       className={[
-        "sticky top-[65px] hidden h-[calc(100vh-65px)] shrink-0 border-r md:flex md:flex-col",
-        collapsed ? "md:w-20" : "md:w-[250px]",
+        "fixed inset-y-[65px] left-0 z-40 flex h-[calc(100vh-65px)] shrink-0 -translate-x-full flex-col border-r transition-transform duration-300 md:sticky md:inset-auto md:left-auto md:top-[65px] md:h-[calc(100vh-65px)] md:translate-x-0 md:flex",
+        mobileOpen ? "translate-x-0" : "-translate-x-full",
+        collapsed ? "w-[72px] md:w-20" : "w-[82vw] max-w-[280px] md:w-[250px]",
         shellClasses,
       ].join(" ")}
+      data-mobile-open={mobileOpen}
     >
       <div className={`flex items-start justify-between gap-3 border-b px-4 py-4 ${divider}`}>
         <div className="flex min-w-0 items-center gap-3">
@@ -120,6 +124,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                           : inactiveClasses,
                       ].join(" ")
                     }
+                    onClick={onClose}
                     to={item.to}
                   >
                     {({ isActive }) => (
@@ -156,6 +161,7 @@ const Sidebar = ({ collapsed, onToggleCollapse }: SidebarProps) => {
                           : inactiveClasses,
                       ].join(" ")
                     }
+                    onClick={onClose}
                     to={item.to}
                   >
                     {({ isActive }) => (
