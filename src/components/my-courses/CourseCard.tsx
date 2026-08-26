@@ -1,5 +1,5 @@
 import { ArrowRight, BookOpen, Clock3, MessageSquareText, Users } from "lucide-react";
-
+import { NavLink } from "react-router-dom";
 import type { CourseCardData, CourseViewMode } from "../../Database/coursesmain";
 
 type CourseCardProps = {
@@ -101,10 +101,10 @@ const CourseCard = ({ course, viewMode = "grid" }: CourseCardProps) => {
           <p className="text-[var(--app-muted)]">
             Last activity <span className="px-2">•</span> {course.lastActivity}
           </p>
-          <a className="inline-flex items-center gap-1 font-medium text-[var(--app-brand)] hover:underline" href="#analytics">
+          <NavLink to={"/course-progress"} className="inline-flex items-center gap-1 font-medium text-[var(--app-brand)] hover:underline">
             View Analytics
             <ArrowRight size={16} />
-          </a>
+          </NavLink>
         </div>
       </div>
     </article>
