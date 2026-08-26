@@ -1,3 +1,4 @@
+import { Navigate } from "react-router-dom";
 import "./App.css";
 import {
   ActivityCenter,
@@ -27,7 +28,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path='/' element={<Layout />}>
-        <Route index element={<Overview />} />
+        <Route index element={<Navigate to="overview" replace />} />
         <Route path='overview' element={<Overview />} />
         <Route path='my-courses' element={<MyCourses />} />
         <Route path='course-progress' element={<CourseProgress />} />
@@ -44,4 +45,4 @@ const router = createBrowserRouter(
   ),
 );
 
-export {App, router }
+export { App, router }
