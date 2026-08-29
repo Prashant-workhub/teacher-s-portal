@@ -26,12 +26,10 @@ type SidebarProps = {
 const workspaceItems = [
   { label: "Dashboard", to: "/overview", icon: LayoutDashboard },
   { label: "My Courses", to: "/my-courses", icon: BookOpen },
-  { label: "Course Progress", to: "/course-progress", icon: PanelTopOpen },
   { label: "Student Doubts", to: "/student-doubts", icon: BadgeInfo },
-  { label: "Quiz Mode", to: "/quiz-performance", icon: GraduationCap },
-  { label: "Learning Analytics", to: "/learning-analytics", icon: Sparkles },
-  { label: "Lecture Insights", to: "/lecture-insights", icon: Mic },
-  { label: "Announcements / Resources", to: "/announcements-resources", icon: BookText },
+  { label: "Assessment", to: "/assessment", icon: GraduationCap },
+  { label: "Teaching Analytics", to: "/teaching-analytics", icon: Sparkles },
+  { label: "Announcements", to: "/announcements", icon: BookText },
 ];
 
 const controlItems = [
