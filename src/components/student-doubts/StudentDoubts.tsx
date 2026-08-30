@@ -1,5 +1,9 @@
 const StudentDoubts = () => {
-  return <section className="p-6">Student Doubts</section>;
-};
+  return (
+    <div>
 
-export default StudentDoubts;
+    </div>
+  )
+}
+
+export default StudentDoubts

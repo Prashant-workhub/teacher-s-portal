@@ -38,7 +38,7 @@ const Header = ({ onMobileSidebarToggle }: HeaderProps) => {
           </button>
 
           <div className="cursor-pointer rounded-md px-1 py-2 text-2xl font-semibold tracking-[0.12em] sm:px-3 sm:text-3xl">
-            <NavLink to="/">Noteit</NavLink>
+            <NavLink to="/landing">Noteit</NavLink>
           </div>
           <div className="hidden min-w-0 flex-col leading-tight md:flex">
             <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--app-muted)]">

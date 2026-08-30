@@ -15,16 +15,19 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "./components/imports";
+import HeroSection from "./components/landingPage/LandingPage";
 
 function App() {
   return (
-    <></>
+    <HeroSection />
   )
 }
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      <Route path='/landing' element={<HeroSection />} />
+
       <Route path='/' element={<Layout />}>
         <Route index element={<Navigate to="overview" replace />} />
         <Route path='overview' element={<Overview />} />
