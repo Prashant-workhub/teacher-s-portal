@@ -38,7 +38,7 @@ const Header = ({ onMobileSidebarToggle }: HeaderProps) => {
           </button>
 
           <div className="cursor-pointer rounded-md px-1 py-2 text-2xl font-semibold tracking-[0.12em] sm:px-3 sm:text-3xl">
-            <NavLink to="/landing">Noteit</NavLink>
+            <NavLink to="/">Noteit</NavLink>
           </div>
           <div className="hidden min-w-0 flex-col leading-tight md:flex">
             <span className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--app-muted)]">
@@ -101,7 +101,7 @@ const Header = ({ onMobileSidebarToggle }: HeaderProps) => {
               panelBg,
               textMain,
             ].join(" ")}
-            to="/activity"
+            to="activity"
           >
             <Bell size={18} />
             <span className="absolute right-2 top-2 h-2.5 w-2.5 rounded-full bg-[#DC2626]" />
@@ -110,7 +110,7 @@ const Header = ({ onMobileSidebarToggle }: HeaderProps) => {
           <div className={`${brandBg} h-10 w-10 rounded-xl p-0.5`}>
             <NavLink
               className="grid h-full w-full place-items-center rounded-[10px] bg-white text-sm font-semibold text-[var(--app-brand-strong)]"
-              to="/profile-settings"
+              to="profile-settings"
             >
               A
             </NavLink>

@@ -20,12 +20,12 @@ type SidebarProps = {
 };
 
 const workspaceItems = [
-  { label: "Dashboard", to: "/overview", icon: LayoutDashboard },
-  { label: "My Courses", to: "/my-courses", icon: BookOpen },
-  { label: "Student Doubts", to: "/student-doubts", icon: BadgeInfo },
-  { label: "Assessment", to: "/assessment", icon: GraduationCap },
-  { label: "Teaching Analytics", to: "/teaching-analytics", icon: Sparkles },
-  { label: "Announcements", to: "/announcements", icon: BookText },
+  { label: "Dashboard", to: "overview", icon: LayoutDashboard },
+  { label: "My Courses", to: "my-courses", icon: BookOpen },
+  { label: "Student Doubts", to: "student-doubts", icon: BadgeInfo },
+  { label: "Assessment", to: "assessment", icon: GraduationCap },
+  { label: "Teaching Analytics", to: "teaching-analytics", icon: Sparkles },
+  { label: "Announcements", to: "announcements", icon: BookText },
 ];
 
 const Sidebar = ({
@@ -178,6 +178,7 @@ const Sidebar = ({
                 </p>
               </div>
               <button
+
                 aria-label='Sign out'
                 className={[
                   "ml-auto grid h-9 w-9 place-items-center rounded-lg border transition hover:scale-[1.02]",

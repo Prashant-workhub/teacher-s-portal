@@ -26,9 +26,9 @@ function App() {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path='/landing' element={<HeroSection />} />
+      <Route path='/' element={<HeroSection />} />
 
-      <Route path='/' element={<Layout />}>
+      <Route path='dashboard' element={<Layout />}>
         <Route index element={<Navigate to="overview" replace />} />
         <Route path='overview' element={<Overview />} />
         <Route path='my-courses' element={<MyCourses />} />
